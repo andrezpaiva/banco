@@ -4,7 +4,7 @@ import store from '../store/index'
 const TheHeader = () => import('@/components/layout/TheHeader')
 
 const Dashboard = () => import('@/views/Dashboard')
-const Home = () => import('@/views/Home')
+// const Home = () => import('@/views/Home')
 const Login = () => import('@/views/Login')
 const TwoFactor = () => import('@/views/TwoFactor')
 const ShareRequest = () => import('@/views/ShareRequest')
@@ -21,16 +21,16 @@ const routes = [
       requiresAuth: true
     }
   },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   components: {
+  //     default: Home,
+  //     header: TheHeader
+  //   }
+  // },
   {
     path: '/',
-    name: 'Home',
-    components: {
-      default: Home,
-      header: TheHeader
-    }
-  },
-  {
-    path: '/login',
     name: 'Login',
     components: {
       default: Login,

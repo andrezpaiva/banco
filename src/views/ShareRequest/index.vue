@@ -6,7 +6,9 @@
       classes="flex justify-center items-center"
       content-class="relative flex flex-col max-h-full max-w-2xl mx-4 p-6 bg-white dark:bg-gray-900"
     >
-      <ShareRequestModalTermsConditions />
+      <ShareRequestModalTermsConditions
+        @ok="state.showModalConfirmation = true, state.showModalTermsConditions = false"
+      />
       <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
     </vue-final-modal>
 
@@ -16,7 +18,10 @@
       classes="flex justify-center items-center"
       content-class="relative flex flex-col max-h-full w-96 mx-4 p-6 bg-white dark:bg-gray-900"
     >
-      <ShareRequestModalConfirmation />
+      <ShareRequestModalConfirmation
+        @no="state.showModalConfirmation = false"
+        @yes="state.showModalConfirmation = false, state.showModalSuccess = true"
+      />
       <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
     </vue-final-modal>
 
@@ -55,13 +60,14 @@
 
             <ShareRequestCode class="mb-3" />
 
-            <app-button
+            <!-- <app-button
               type="submit"
               :disabled="state.isLoading"
               :loading="state.isLoading"
             >
               LER TERMOS E CONDIÇÕES
-            </app-button>
+            </app-button> -->
+            <app-button @click="state.showModalTermsConditions = true">LER TERMOS E CONDIÇÕES</app-button>
           </form>
         </div>
       </div>

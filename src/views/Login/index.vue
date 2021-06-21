@@ -6,7 +6,9 @@
       classes="flex justify-center items-center"
       content-class="relative flex flex-col max-h-full max-w-2xl mx-4 p-6 bg-white dark:bg-gray-900"
     >
-      <LoginAttention />
+      <LoginAttention
+        @ok="redirect"
+      />
       <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
     </vue-final-modal>
 
@@ -45,7 +47,8 @@
               <router-link to="/" class="text-primary-light cursor-pointer underline">Esqueci minha senha</router-link>
             </div>
 
-            <app-button type="submit" :disabled="state.isLoading" :loading="state.isLoading">CONFIRMAR</app-button>
+            <!-- <app-button type="submit" :disabled="state.isLoading" :loading="state.isLoading">CONFIRMAR</app-button> -->
+            <app-button @click="modal">CONFIRMAR</app-button>
           </form>
         </div>
       </div>
@@ -111,8 +114,16 @@ export default {
         errorMessage: passwordErrorMessage
       },
       isLoading: false,
-      showModal: true
+      showModal: false
     })
+
+    const modal = () => {
+      state.showModal = true
+    }
+
+    const redirect = () => {
+      router.push({ name: 'TwoFactor' })
+    }
 
     const onSubmit = handleSubmit(async (values) => {
       state.isLoading = true
@@ -135,7 +146,9 @@ export default {
 
     return {
       state,
-      onSubmit
+      onSubmit,
+      modal,
+      redirect
     }
   }
 }

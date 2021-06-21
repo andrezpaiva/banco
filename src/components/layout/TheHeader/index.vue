@@ -4,7 +4,7 @@
       <img
         src="../../../assets/images/logo.png"
         class="h-12 cursor-pointer mr-6"
-        @click="goPage('Home')"
+        @click="goPage('Login')"
       />
 
       <TheHeaderNav :items="state.list" />

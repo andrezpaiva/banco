@@ -5,7 +5,7 @@
     <div class="flex flex-col">
       <div class="flex lg:p-0 px-8 justify-center text-primary-dark">
         <div class="max-w-sm">
-          <form @submit="onSubmit">
+          <!-- <form @submit="onSubmit"> -->
             <p class="text-sm mb-4">
               Enviamos uma mensagem de texto para seu telefone (11) XXXXX-9999. Insira no campo abaixo o código recebido para entrar.
             </p>
@@ -27,8 +27,9 @@
               "Caso não reconheça esse número de telefone, faça atualização do seu cadastro ligando na Central de Atendimento 3003-4022 (Capitais e Regiões Metropolitanas) / 0800 200 4022 (demais localidades)"
             </p>
 
-            <app-button type="submit" :disabled="state.isLoading" :loading="state.isLoading">VERIFICAR</app-button>
-          </form>
+            <!-- <app-button type="submit" :disabled="state.isLoading" :loading="state.isLoading">VERIFICAR</app-button> -->
+            <app-button @click="redirect">VERIFICAR</app-button>
+          <!-- </form> -->
         </div>
       </div>
     </div>
@@ -73,6 +74,10 @@ export default {
       showModal: true
     })
 
+    const redirect = () => {
+      router.push({ name: 'ShareRequest' })
+    }
+
     const onSubmit = handleSubmit(async (values) => {
       router.push({ name: 'Dashboard' })
       // state.isLoading = true
@@ -95,7 +100,8 @@ export default {
 
     return {
       state,
-      onSubmit
+      onSubmit,
+      redirect
     }
   }
 }
