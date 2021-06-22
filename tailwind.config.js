@@ -1,7 +1,9 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: false,
+  purge: {
+    enabled: false
+  },
   presets: [],
   darkMode: false,
   theme: {
