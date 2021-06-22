@@ -20,10 +20,16 @@
       >
         <div class="max-w-sm">
           <form @submit="onSubmit">
-            <p class="text-sm mb-4">
+            <p class="text-sm mb-6">
               <span>Entre com seu CPF ou CNPJ para ter acesso ao Portal </span>
               <span class="font-bold">Banco PSA</span>
             </p>
+
+            <AppRadioGroup
+              :options="state.decisions"
+              v-model="state.selected"
+              class="pb-6"
+            />
 
             <app-input
               type="number"
@@ -76,6 +82,7 @@ import { validateEmptyAndLength3, validateEmptyAndCPF } from '@/utils/validators
 import services from '@/services/index'
 import AppButton from '@/components/ui/AppButton'
 import AppInput from '@/components/ui/AppInput'
+import AppRadioGroup from '@/components/ui/AppRadioGroup'
 import AppLineX from '@/components/ui/AppLineX'
 import LoginAttention from './LoginAttention'
 import { XIcon } from '@heroicons/vue/outline'
@@ -84,6 +91,7 @@ export default {
   components: {
     AppButton,
     AppInput,
+    AppRadioGroup,
     AppLineX,
     LoginAttention,
     XIcon
@@ -114,7 +122,9 @@ export default {
         errorMessage: passwordErrorMessage
       },
       isLoading: false,
-      showModal: false
+      showModal: false,
+      decisions: ['Pessoa física', 'Pessoa jurídica'],
+      selected: ''
     })
 
     const modal = () => {

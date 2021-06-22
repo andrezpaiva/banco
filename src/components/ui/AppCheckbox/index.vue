@@ -1,14 +1,28 @@
 <template>
   <div class="mb-4">
-    <label class="block text-sm font-semibold mb-1">{{ label }}</label>
-    <input
-      :="$attrs"
-      :placeholder="placeholder"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-      class="transition ease-in-out text-sm block w-full border border-gray-light focus:outline-none py-2 px-3"
-      :class="{'border-danger': !!error, 'focus:border-primary hover:border-primary': !error }"
-    />
+    <label class="flex items-center select-none">
+      <input
+        :="$attrs"
+        type="checkbox"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.checked)"
+        class="hidden"
+      />
+      <div
+        class="h-6 w-6 border"
+        :class="{
+          'bg-primary border-primary': modelValue,
+          'border-gray-light': !modelValue
+        }"
+      >
+        <CheckIcon
+          v-show="modelValue"
+          :class="{ 'text-white': modelValue }"
+        />
+      </div>
+      <span class="text-sm font-semibold ml-3">{{ label }}</span>
+    </label>
+
     <transition name="fade">
       <div
         v-show="!!error"
@@ -21,13 +35,15 @@
 </template>
 
 <script>
+import { CheckIcon } from '@heroicons/vue/outline'
+
 export default {
+  components: {
+    CheckIcon
+  },
+
   props: {
     label: {
-      type: String,
-      default: ''
-    },
-    placeholder: {
       type: String,
       default: ''
     },
@@ -40,7 +56,7 @@ export default {
       default: ''
     },
     modelValue: {
-      type: [String, Number],
+      type: [String, Number, Boolean],
       default: ''
     }
   }

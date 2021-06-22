@@ -35,6 +35,26 @@
       <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
     </vue-final-modal>
 
+    <vue-final-modal
+      v-model="state.showModalDataSource"
+      v-slot="{ close }"
+      classes="flex justify-end items-center"
+      content-class="relative flex flex-col max-h-full max-w-lg lg:mx-0 mx-4 p-6 bg-white dark:bg-gray-900 overflow-auto"
+    >
+      <ShareRequestModalDataSource />
+      <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
+    </vue-final-modal>
+
+    <vue-final-modal
+      v-model="state.showModalDataSourceCredit"
+      v-slot="{ close }"
+      classes="flex justify-end items-center"
+      content-class="relative flex flex-col max-h-full max-w-lg lg:mx-0 mx-4 p-6 bg-white dark:bg-gray-900 overflow-auto"
+    >
+      <ShareRequestModalDataSourceCredit />
+      <XIcon @click="close" class="absolute top-4 right-4 mt-2 mr-2 h-6 w-6 cursor-pointer text-gray" />
+    </vue-final-modal>
+
     <AppLineX text="pedido de compartilhamento" class="my-8" />
 
     <div class="flex flex-col">
@@ -54,7 +74,11 @@
 
             <ShareRequestIdentification class="mb-3" />
 
-            <ShareRequestConfirmationForm class="mb-3" />
+            <ShareRequestConfirmationForm
+              class="mb-3"
+              @showDataSource="state.showModalDataSource = true"
+              @showDataSourceCredit="state.showModalDataSourceCredit = true"
+            />
 
             <ShareRequestDataSource class="mb-3" />
 
@@ -91,6 +115,8 @@ import ShareRequestConfirmationForm from './ShareRequestConfirmationForm'
 import ShareRequestModalTermsConditions from './ShareRequestModalTermsConditions'
 import ShareRequestModalConfirmation from './ShareRequestModalConfirmation'
 import ShareRequestModalSuccess from './ShareRequestModalSuccess'
+import ShareRequestModalDataSource from './ShareRequestModalDataSource'
+import ShareRequestModalDataSourceCredit from './ShareRequestModalDataSourceCredit'
 import AppAvatarCompare from '@/components/ui/AppAvatarCompare'
 import { XIcon } from '@heroicons/vue/outline'
 
@@ -106,6 +132,8 @@ export default {
     ShareRequestModalConfirmation,
     AppAvatarCompare,
     ShareRequestModalSuccess,
+    ShareRequestModalDataSource,
+    ShareRequestModalDataSourceCredit,
     XIcon
   },
 
@@ -128,7 +156,9 @@ export default {
       isLoading: false,
       showModalTermsConditions: false,
       showModalConfirmation: false,
-      showModalSuccess: false
+      showModalSuccess: false,
+      showModalDataSource: false,
+      showModalDataSourceCredit: false
     })
 
     const onSubmit = handleSubmit(async (values) => {
